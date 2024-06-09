@@ -1,6 +1,10 @@
+using MusicApi.Models;
+using MusicApi.Models.DTOs;
+
 namespace MusicApi.Services;
 
-public class IMusicianService
+public interface IMusicianService
 {
-    
+    Task<MuzykDTO>GetMuzyk(int idMusician);
+    Task<bool> AddMuzyk(AddMuzykDTO newMuzyk);
 }
