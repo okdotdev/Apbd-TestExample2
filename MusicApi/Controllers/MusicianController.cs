@@ -52,7 +52,7 @@ public class MusicianController : ControllerBase
             return Ok("Usunięto muzyka");
         }
 
-        return BadRequest("Nie udało się usunąć muzyka");
+        return NotFound("Nie udało się usunąć muzyka");
     }
 
 }
