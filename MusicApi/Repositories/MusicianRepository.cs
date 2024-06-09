@@ -69,12 +69,11 @@ public class MusicianRepository : IMusicianRepository
                 {
                     NazwaUtworu = newMuzyk.NazwaUtworu,
                     CzasTrwania = newMuzyk.CzasTrwania,
-                    WykonawcaUtworu = new List<Muzyk>()
+                    WykonawcaUtworu = new List<Muzyk>(),
+                    IdAlbum = 0
                 };
 
                 newUtwor.WykonawcaUtworu.Add(muzyk);
-                muzyk.WykonawcaUtworu.Add(newUtwor);
-                await _appDbContext.AddAsync(muzyk);
                 await _appDbContext.Utory.AddAsync(newUtwor);
                 await _appDbContext.SaveChangesAsync();
                 return true;
@@ -90,7 +89,7 @@ public class MusicianRepository : IMusicianRepository
         }
         catch (Exception e)
         {
-
+            Console.WriteLine($"An error occurred: {e.Message}");
             return false;
         }
     }
