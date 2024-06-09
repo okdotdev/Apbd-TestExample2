@@ -19,7 +19,7 @@ public class UtworEFConfig: IEntityTypeConfiguration<Utwor>
             .WithMany(a => a.Utwory)
             .HasConstraintName("Utwor_Album")
             .HasForeignKey(e => e.IdAlbum)
-            .OnDelete(DeleteBehavior.Restrict);;
+            .OnDelete(DeleteBehavior.Restrict);
 
 
         builder.ToTable("Utwor");

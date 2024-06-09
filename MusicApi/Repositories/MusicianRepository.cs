@@ -69,12 +69,12 @@ public class MusicianRepository : IMusicianRepository
                 {
                     NazwaUtworu = newMuzyk.NazwaUtworu,
                     CzasTrwania = newMuzyk.CzasTrwania,
-                    WykonawcaUtworu = new List<Muzyk>(),
-                    IdAlbum = 0
+                    WykonawcaUtworu = new List<Muzyk>()
                 };
 
-                newUtwor.WykonawcaUtworu.Add(muzyk);
-                await _appDbContext.Utory.AddAsync(newUtwor);
+                muzyk.WykonawcaUtworu.Add(newUtwor);
+                utwor.WykonawcaUtworu.Add(muzyk);
+                await _appDbContext.AddAsync(muzyk);
                 await _appDbContext.SaveChangesAsync();
                 return true;
             }
@@ -92,5 +92,19 @@ public class MusicianRepository : IMusicianRepository
             Console.WriteLine($"An error occurred: {e.Message}");
             return false;
         }
+    }
+
+    //usuń muzyka i powiązane z nim utwory (olewamy albumy)
+    public async Task<bool> DeleteMuzyk(int idMuzyk)
+    {
+
+        //cascade jak prowadzący powie że nie  nie można kaskadowo to jesteśmy w ciemnej d....
+        var musicianToRemove = await _appDbContext.Muzycy.Where(j => j.IdMuzyk == idMuzyk).FirstAsync();
+        _appDbContext.Muzycy.Remove(musicianToRemove);
+        await _appDbContext.SaveChangesAsync();
+
+
+
+        return true;
     }
 }
