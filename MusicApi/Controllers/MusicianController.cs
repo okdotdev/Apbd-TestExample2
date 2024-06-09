@@ -41,4 +41,18 @@ public class MusicianController : ControllerBase
             return BadRequest("Nie udało się dodać muzyka");
 
     }
+
+    [HttpDelete]
+    public async Task<IActionResult> DeleteMuzyk(int idMuzyk)
+    {
+        var result = await _musicianService.DeleteMuzyk(idMuzyk);
+
+        if (result)
+        {
+            return Ok("Usunięto muzyka");
+        }
+
+        return BadRequest("Nie udało się usunąć muzyka");
+    }
+
 }

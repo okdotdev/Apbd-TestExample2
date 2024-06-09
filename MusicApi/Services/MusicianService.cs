@@ -22,4 +22,9 @@ public class MusicianService : IMusicianService
     {
         return await _musicianRepository.AddMuzyk(newMuzyk);
     }
+
+    public async Task<bool> DeleteMuzyk(int idMuzyk)
+    {
+        return await _musicianRepository.DeleteMuzyk(idMuzyk);
+    }
 }
